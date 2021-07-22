@@ -102,6 +102,7 @@ class Recognizer:
         results = self.hands.process(frame)
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
+        gesture_str = None
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 self.mp_drawing.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS)
@@ -114,5 +115,7 @@ class Recognizer:
                     angle_list = hand_angle(hand_local)
                     gesture_str = h_gesture(angle_list)
                     cv2.putText(frame,gesture_str,(0,100),0,1.3,(0,0,255),3)
+
         cv2.imshow('MediaPipe Hands', frame)
+        return gesture_str
 
