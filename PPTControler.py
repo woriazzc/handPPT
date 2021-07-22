@@ -24,6 +24,12 @@ class PPTControler:
 			self.app.ActivePresentation.SlideShowSettings.Run()
 			return self.getActivePresentationSlideIndex()
 
+	def fullScreenWithCurPage(self):
+		# 从当前页开始播放
+		idx = self.getActivePresentationSlideIndex()
+		self.fullScreen()
+		self.gotoSlide(idx)
+
 	def click(self):
 		win32api.keybd_event(VK_CODE['spacebar'],0,0,0)
 		win32api.keybd_event(VK_CODE['spacebar'],0,win32con.KEYEVENTF_KEYUP,0)

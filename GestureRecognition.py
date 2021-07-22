@@ -57,7 +57,7 @@ def hand_angle(hand_):
 def h_gesture(angle_list):
     '''
         # 二维约束的方法定义手势
-        # fist five gun love one six three thumbup yeah
+        # fist five gun love one six three thumbup two
     '''
     thr_angle = 65.
     thr_angle_thumb = 53.
