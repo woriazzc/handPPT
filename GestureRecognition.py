@@ -86,14 +86,14 @@ def h_gesture(angle_list):
 
 class Recognizer:
     def __init__(self):
-        mp_drawing = mp.solutions.drawing_utils
-        mp_hands = mp.solutions.hands
-        hands = mp_hands.Hands(
+        self.mp_drawing = mp.solutions.drawing_utils
+        self.mp_hands = mp.solutions.hands
+        self.hands = self.mp_hands.Hands(
             static_image_mode=False,
             max_num_hands=1,
             min_detection_confidence=0.75,
             min_tracking_confidence=0.75)
-        cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(0)
 
     def detect(self):
         ret,frame = self.cap.read()
@@ -104,7 +104,7 @@ class Recognizer:
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
-                self.mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                self.mp_drawing.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS)
                 hand_local = []
                 for i in range(21):
                     x = hand_landmarks.landmark[i].x*frame.shape[1]
@@ -115,3 +115,4 @@ class Recognizer:
                     gesture_str = h_gesture(angle_list)
                     cv2.putText(frame,gesture_str,(0,100),0,1.3,(0,0,255),3)
         cv2.imshow('MediaPipe Hands', frame)
+
